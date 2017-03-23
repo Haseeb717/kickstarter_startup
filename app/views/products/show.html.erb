@@ -1,0 +1,112 @@
+<%= javascript_include_tag 'jquery.raty.js','ratyrate.js'%>
+<!-- blog -->
+<div class="container">
+        
+  <br />
+  <h1 >
+    <%= @product.user.name %>
+  </h1>
+
+  <h4 class="col-md-8 marginLeft-15"><%= @product.short_description %></h4>
+
+  <div class="row">
+    <div class="col-md-8">
+  
+      <!--  <img src="http://placehold.it/900x300" class="img-responsive"> -->
+    
+      <div class="vid">
+        
+        <% if @product.video.content_type.nil? %>
+          <video width="100%" controls="">
+            <source src="https://ksr-video.imgix.net/projects/2760435/video-738279-h264_high.mp4" type="video/mp4">
+          </video>
+        <% else %>
+          <%= video_tag @product.video.url(), :controls => true,:width=>"100%"  %> 
+        <% end %>
+          
+      </div> <!-- vid -->
+
+      <hr>
+      <p class="lead"><%= @product.description %></p>
+      <p><b>Future Plans: </b> <%= @product.future_plans %></p>
+      <p><b>Risks and Challenges: </b><%= @product.risks %></p>
+      <hr>
+
+      <div class="pull-left">
+        <% if @product.user.image.content_type.nil? %>   
+          <%= image_tag "julia.jpg" ,:class=>"img-circle" %>
+        <% else %>
+          <%= image_tag @product.user.image.url(:small) ,:class=>"img-circle" %>
+        <% end %>
+        <p>By <%= @product.user.name %> </p>
+        <p><%= time_ago_in_words(@product.created_at) + " ago" %></p>
+        <p><button class="btn btn-default">Follow</button></p>
+      </div>
+      <div class="pull-right">
+        <p>
+          <i class="fa fa-calendar"></i> Posted on <%= @product.created_at.strftime("%d %b. %Y") %>
+        </p>
+        <p>
+          <i class="fa fa-tags"></i> Category: <a href=""><span class="badge badge-info"><%= @product.category.name %></span></a> 
+        </p>
+        <p>
+          <i class="fa fa-tags"></i> Tags: 
+          <a href="">
+            <% @product.tag_list.each do |tag| %>
+              <span class="badge badge-info">
+                <%= tag %>
+              </span>
+            <% end %>
+          </a> 
+        </p>
+      </div>
+      <div class="clearfix"></div>
+      <hr>
+    </div> <!-- col-md-8 -->
+
+    <div class="col-md-4">                  
+      <div class="borderTopgreen"></div>
+      <h2>$<%= @product.raised_amount.nil? ? 0 : @product.raised_amount %></h2>
+      <p>rasied of $<%= @product.funding_goal %> goal</p>
+
+      <div style="margin-top:20px;"></div>
+      Rating : <%= rating_for @product, 'engine' %>
+
+      <h2><%= @product.backers_total %></h2>
+      <p>backers</p>
+
+      <h2>60</h2>
+      <p>days to go</p>
+
+      <% backed = BackProduct.where(:user_id=>current_user.id,:product_id=>@product.id) %>
+
+      <%= link_to "Back this Project" ,back_product_path(@product),:class=>"btn btn-success btn-lg product_back_button" %>
+      <p class="marginTop20">
+        <%= link_to like_product_path(@product),:class=>"btn btn-default" do %>
+          <%= fa_icon "heart" %> Favourite <b><%= @product.likers(User).count %></b>
+        <% end %>&nbsp;&nbsp;
+        <button class="btn btn-default"><i class="fa fa-share"></i> Share</button>
+        <%= link_to report_product_path(@product),:class=>"btn btn-default" do %>
+        <%= fa_icon "flag" %> Report <b><%= ReportProduct.where(:product_id=>@product.id).count %></b>
+      <% end %>
+      </p>
+      <% if @product.user == current_user %>
+        <p>
+          <%= link_to edit_product_path(@product),:class=>"btn btn-info btn-lg product_edit_button" do %>
+            <%= fa_icon "edit" %> Edit
+          <% end %>
+        </p>
+      <% end %>
+      <% if @product.user == current_user %>
+        <p>
+          <%= link_to @product,  method: :delete, data: { confirm: 'Are you sure?' },:class=>"btn btn-danger btn-lg product_destroy_button" do %>
+            <%= fa_icon "trash" %> Delete
+          <% end %>
+        </p>
+      <% end %>
+    </div> <!-- col-md-4 -->
+
+  </div> <!-- row -->
+</div> <!-- container -->
+
+<!-- blog -->

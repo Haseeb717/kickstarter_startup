@@ -1,0 +1,13 @@
+defaults: &defaults
+  app_id: '476816502023-v8s1kbqkuhj7lgfe90ero20i3fn3k2hf.apps.googleusercontent.com'
+  app_secret: 'rNN7xGyXPO5SdTvpa1MqEWIc'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  app_id: '494089729612-63h1jk5gnti9jgq8u9cdcof1efhr3h6v.apps.googleusercontent.com'
+  app_secret: 'jn-N2c4WJ94TNPIuzyiRGP9L'

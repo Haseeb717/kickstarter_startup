@@ -1,0 +1,59 @@
+<div class="row" style="padding:40px 0;">
+  <div id="user-account-form">
+    <div class="rounded-content-frame__content current" id="login">
+      <h2 class="title">
+        Login
+      </h2>
+    </div>
+    <div class="mb3">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form-simple" }) do |f| %>
+        <fieldset class="mb2">
+          <ol>
+            <li><%= devise_error_messages! %></li>
+            <li class="mb3">
+              <%= f.email_field :email, autofocus: true,:placeholder=>"Email",:required=>true %>
+            </li>
+          </ol>
+
+          <ol>
+            <li class="mb3 relative">
+              <div class="relative">
+                <%= f.password_field :password, autocomplete: "off",:placeholder=>"Password",:required=>true %>
+              </div>
+              <%= link_to "Forgot your password?", new_password_path(resource_name),:class=>"forgot-password-link" %>
+            <li>
+          </ol>
+
+          <% if devise_mapping.rememberable? -%>
+            <!-- <div class="field">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+            </div> -->
+          <% end -%>
+          <ol>
+            <li class="m0">
+              <%= f.submit "Log me in!",:class=>"btn btn--green btn--block submit" %>
+            <li>
+          </ol>
+        </fieldset>
+      <% end %>
+    </div>
+    <div class="text-strikethru">
+      <div class="line"></div>
+      <div class="text">or</div>
+    </div>
+    <div class="mb2 mb_custom">
+      <%= button_to "Log in with Facebook", user_facebook_omniauth_authorize_path,:class=>"js-facebook-login btn btn--facebook btn--with-svg btn--block" %>   
+    </div>
+    <div class="mb2 mb_custom">
+      <%= button_to "Log in with Google", user_google_oauth2_omniauth_authorize_path,:class=>"js-facebook-login btn btn--google btn--with-svg btn--block" %>      
+    </div>
+    <div class="rounded-content-frame__footer">
+      New to Kickstarter?
+      <%= link_to("Sign Up",new_user_registration_path,:class=>"bold js-switch-to-login") %>
+    </div>
+    
+  </div>
+</div>
+
+

@@ -1,0 +1,13 @@
+defaults: &defaults
+  app_id: '299365846934506'
+  app_secret: 'b6fea545242d981a677540a06ca9d640'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  app_id: '1769778146681308'
+  app_secret: 'dfd5565c347f71433f0a17506b55f79b'

@@ -1,0 +1,86 @@
+
+
+
+<div class="row" style="padding:40px 0;">
+  <div id="user-account-form" style="padding-bottom: 40px; ">
+    <div class="rounded-content-frame__content current" id="signup">
+      <h2 class="title">
+        Update
+      </h2>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "form-simple", multipart: true }) do |f| %>
+      <fieldset>
+        <ol>
+          <li><%= devise_error_messages! %></li>
+
+          <li class="mb3">
+            <%= f.label :name,:class=>"offscreen" %>
+            <%= f.text_field :name, autofocus: true,:placeholder=>"Name",:required=>true %>
+          </li>
+
+          <li class="mb3">
+            <%= f.label :email,:class=>"offscreen" %>
+            <%= f.email_field :email,:placeholder=>"Email",:required=>true %>
+          </li>
+
+          <li class="mb3">
+            <%= f.label :date_of_birth,:class=>"offscreen" %>
+            <%= f.text_field :date_of_birth,:placeholder=>"Date of Birth",:required=>true,:class=>"date_of_birth" %>
+          </li>
+
+          <li class="mb3">
+            <%= f.label :phone_number,:class=>"offscreen" %>
+            <%= f.text_field :phone_number,:placeholder=>"Phone number",:required=>true %>
+          </li>
+
+          <li class="mb3">
+            <%= f.label :country,:class=>"offscreen" %>
+            <%= f.text_field :country,:placeholder=>"Country",:required=>true %>
+          </li>
+
+          <li class="mb3">
+            <%= f.label :password,:class=>"offscreen" %>
+            <%= f.password_field :password, autocomplete: "off",:placeholder=>"Password"%>
+          </li>
+
+          <li class="mb3">
+            <%= f.label :password_confirmation,:class=>"offscreen"  %>
+            <%= f.password_field :password_confirmation, autocomplete: "off",:placeholder=>"Password Confirmation" %>
+          </li>
+
+          <li class="mb3">
+            <%= f.label :current_password,:class=>"offscreen" %>
+            <%= f.password_field :current_password, autocomplete: "off",:placeholder=>"Current Password"%>
+          </li>
+
+          <li class="mb3">
+            <%= f.label :biography,:class=>"offscreen" %>
+            <%= f.text_area :biography,:placeholder=>"Biography",:required=>true,:class=>"custom_textarea" %>
+          </li>
+
+          <li class="mb3">
+            <label> Profile Picture </label>
+            <%= f.file_field :image, class: "form-control",:class=>"profile_pic_edit" %>
+          </li>
+
+          <li class="m0">
+            <br>
+            <%= f.submit "Update",:class=>"btn btn--green btn--block submit" %>
+          <li>
+        </ol>
+      </fieldset>
+    <% end %>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $(function() {
+    $('.date_of_birth').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+    
+  });
+  
+</script>

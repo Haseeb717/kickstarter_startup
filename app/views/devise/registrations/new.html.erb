@@ -1,0 +1,64 @@
+<div class="row" style="padding:40px 0;">
+  <div id="user-account-form" style="padding-bottom: 40px; ">
+    <div class="rounded-content-frame__header">
+      Have an account?
+      <%= link_to("Log in",session_path(resource_name),:class=>"bold js-switch-to-login") %>
+    </div>
+    <div class="rounded-content-frame__content current" id="signup">
+      <h2 class="title">
+        Sign up
+      </h2>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "form-simple" }) do |f| %>
+      <fieldset>
+        <ol>
+          <li><%= devise_error_messages! %></li>
+
+          <li class="mb3">
+            <%= f.label :name,:class=>"offscreen" %>
+            <%= f.text_field :name, autofocus: true,:placeholder=>"Name",:required=>true %>
+          </li>
+
+          <li class="mb3">
+            <%= f.label :email,:class=>"offscreen" %>
+            <%= f.email_field :email,:placeholder=>"Email",:required=>true %>
+          </li>
+
+          <li class="mb3">
+            <%= f.label :password,:class=>"offscreen" %>
+            <!--  <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %><br /> -->
+            <%= f.password_field :password, autocomplete: "off",:placeholder=>"Password",:required=>true %>
+          </li>
+
+          <li class="mb3">
+            <%= f.label :password_confirmation,:class=>"offscreen"  %>
+            <%= f.password_field :password_confirmation, autocomplete: "off",:placeholder=>"Password Confirmation",:required=>true %>
+          </li>
+
+          <li class="m0">
+            <br>
+            <%= f.submit "Sign up up!",:class=>"btn btn--green btn--block submit" %>
+          <li>
+        </ol>
+      </fieldset>
+    <% end %>
+    <div class="text-strikethru">
+      <div class="line"></div>
+      <div class="text">or</div>
+    </div>
+    <div class="mb2 mb_custom">
+      <%= button_to "Log in with Facebook", user_facebook_omniauth_authorize_path,:class=>"js-facebook-login btn btn--facebook btn--with-svg btn--block" %>      
+    </div>
+    <div class="mb2 mb_custom">
+      <%= button_to "Log in with Google", user_google_oauth2_omniauth_authorize_path,:class=>"js-facebook-login btn btn--google btn--with-svg btn--block" %>      
+    </div>
+
+    
+
+  </div>
+</div>
+
+

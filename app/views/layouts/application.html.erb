@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CompanyStartup</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  	<!-- Header -->
+		<nav class="navbar navbar-default customnav" id="ForTopHeader">
+		  <div class="container">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		     <!-- <a class="navbar-brand regularfont" href="index.html"><span class="darkblue">KICK</span><span class="green">STARTER</span></a>-->
+		    </div>
+
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav">
+		        <li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Explore <span class="caret"></span></a>
+		          <ul class="dropdown-menu">
+		          	<li><%= link_to "Home", root_path %></li>
+		            <li><%= link_to "All Projects", products_path %></li>
+		            <li><%= link_to "My Projects", my_projects_path %></li>
+		            <li><%= link_to "Favorite Projects", favorite_products_path %></li>
+		            <li><%= link_to "Popular Projects", popular_products_path %></li>	
+		          </ul>
+		        </li>
+		        <li class=""><%= link_to "Start a project", new_product_path %></li>
+		        <li><%= link_to "For you", recommended_products_path %></li>
+		        <li class="marginLeft150">
+		        	<%= link_to root_path, :class=>"regularfont font20" do %>
+		        		<span class="darkblue">KICK</span><span class="green">STARTER</span>
+		        	<% end %>
+		        </li>
+
+		      </ul>
+
+		      
+		      <ul class="nav navbar-nav navbar-right forMedia768">
+		      
+		      
+		      <form class="navbar-form navbar-left">
+		        <!--<div class="form-group">
+		          <input type="text" class="form-control" placeholder="Search">
+		        </div>
+		        <button type="submit" class="btn btn-default">Submit</button>-->
+		   
+
+		        <div class="input-group">
+			      <input type="text" class="form-control" placeholder="Search for...">
+			      <span class="input-group-btn">
+			        <button class="btn btn-default" type="button">Go!</button>
+			      </span>
+			    </div><!-- /input-group -->
+		      </form>
+		        <li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= fa_icon "user" %></i> <span class="caret"></span></a>
+		          <ul class="dropdown-menu">
+		          	<% if user_signed_in? %>
+				      	  <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+				      	  <li><%= link_to('Edit Profile', edit_user_registration_path) %></li>
+				        <% else %>
+				          <li>
+				          	<%= link_to "Login", new_user_session_path, :class => 'sign'  %>
+				          </li>
+				          <li>
+				           	<%= link_to "Sign up", new_user_registration_path,:class=>"sign" %>
+				          </li>
+				        <% end %>
+		            
+		          </ul>
+		        </li>
+		      </ul>
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
+
+		<!-- Header -->
+
+  	<!-- <div class="row" style="background-color:#67AB9F;">
+	    <div class="col-md-4">
+	      <div class="navbar-header">
+	        <p>Company StartUp</p>
+	      </div>
+	    </div>
+	    <div class="col-md-8 navbar-header">
+	      <ul>
+	        <% if user_signed_in? %>
+	      	  <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+	      	  <li><%= link_to('Edit Profile', edit_user_registration_path) %></li>
+	        <% else %>
+	          <li>
+	          	<%= link_to "Login", new_user_session_path, :class => 'sign'  %>
+	          </li>
+	          <li>
+	           	<%= link_to "Sign up", new_user_registration_path,:class=>"sign" %>
+	          </li>
+	        <% end %>
+	      	
+	      </ul>
+	    </div>
+	  </div> -->
+	  <!-- NAV SECTION END -->
+		<div class="row" style="margin: 0 5px;">
+		  <% flash.each do |key, value| %>
+		    <% if key == "alert" %>
+		      <div class="alert alert-danger">
+		        <a href="#" data-dismiss="alert" class="close">×</a>
+		          <ul>
+		            <li style="list-style-type:none;">
+		              <b><%= value %></b>
+		            </li>
+		          </ul>
+		      </div>
+		    <% else %>
+		      <div class="alert alert-info">
+		        <a href="#" data-dismiss="alert" class="close">×</a>
+		          <ul>
+		            <li style="list-style-type:none;">
+		              <b><%= value %></b>
+		            </li>
+		          </ul>
+		      </div>
+		    <% end %>
+		  <% end %>
+		</div>
+    <%= yield %>
+
+    <!-- footer -->
+
+		<div class="footerContent">
+			<div class="container">
+				
+			<div class="row">
+				<div class="col-sm-3 col-md-3">
+					<ul class="footerList">
+						<h4>Crowd Exchange</h4>
+						<li>über Crowd Exchange</li>
+						<li>Blog</li>
+						<li>Team</li>
+						<li>Jobs</li>
+						<li>Partners</li>
+						<li>Kontakt</li>
+					</ul>
+				</div>
+				<div class="col-sm-3 col-md-3">
+					<ul class="footerList">
+						<h4>Hilfe</h4>
+						<li>FAQ</li>
+						<li>Gebühren</li>
+						<li>Handbuch</li>
+						<li>AGB</li>
+					</ul>
+				</div>
+				<div class="col-sm-3 col-md-3">
+					<ul class="footerList">
+						<h4>Infos</h4>
+						<li>Statistik</li>
+					</ul>
+				</div>
+				<div class="col-sm-3 col-md-3">
+					<ul class="footerList SocialIcon">
+						<h4>Social</h4>
+						<li><span><%= fa_icon "facebook" %></span>&nbsp;Facebook</li>
+						<li><span><%= fa_icon "twitter" %></span>Twitter</li>
+						<li><span><%= fa_icon "instagram" %></span>&nbsp;Instagram</li>
+
+				</div>
+			
+			</div>	<!-- row -->
+
+			</div>	 <!-- container -->
+		</div>
+
+		<div class="footer">
+			 <div class="container">						 
+			 	<p>
+			 		<a href="">Help</a>
+			 		<span class="pull-right">&copy; 2017 Kickstarter, PBC
+			 			&nbsp;&nbsp;
+			 		<a href="#ForTopHeader" class="black top-Icon-new"> <span class="fa fa-arrow-up"></span></a>
+			 		</span> 
+			 	</p>	
+			 </div>
+		</div>
+		<!-- footer -->
+
+  </body>
+</html>
